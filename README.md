@@ -1,24 +1,80 @@
-# <p align="center" style="font-size:40px; font-weight: bold;">Angular Boilerplate</p>
+# Galactic Energy Bazaar
 
-<p align="center">
-     <img src="public/icons/icon-512x512.png" alt="angular" width="90">
-     <img src="https://cdn-icons-png.flaticon.com/512/1408/1408941.png" alt="document" width="90">
-</p>
+## Bollerplate
 
-> ### A Fully-Configured Angular 19 Boilerplate for Enterprise-Grade Applications
+Afterr checking galactic energy bazaar requiriments i decided to use bollerplate that has most of the things that i need for the architecture of the project.
+https://github.com/ArslanAmeer/angular-boilerplate
 
----
+bellow you find readme file of the boilerplate.
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/3f3d0969-3549-4300-863d-06a1d6785cd0/deploy-status)](https://app.netlify.com/sites/angular-boiler-palte/deploys)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![commitizen](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg?style=flat-square)]()
-[![PRs](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)]()
+## UI Components library
 
-## [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/arslanameer)
+Another package that i used is: https://js.devexpress.com/Angular/
+I used it because in such application we will bneed a lot of UI components like grids, charts, forms, etc.
 
-- ⬇️ Older Versions
-  - [Angular 18 Branch](https://github.com/ArslanAmeer/angular-boilerplate/tree/angular-v18)
-  - [Angular 16 Branch](https://github.com/ArslanAmeer/angular-boilerplate/tree/angular-v16)
+In this example i used the following grid example with real-time updates: https://js.devexpress.com/Angular/Demos/WidgetsGallery/Demo/DataGrid/RealTimeUpdates/MaterialBlueLight/
+
+I do not have much experience with this package but i think it is a good choice for this project. Probably i coud replace at least grid with AG-Grid package that is more popular and i have goit more experience with. Disadvantage of ag-grid is that we need another package for other UI elements.
+
+### User Roles & Permissions
+
+Authentification is done with auth module in [app/auth](./src/app/auth/) folder. for demonstration it returns hardcoded user with role and permissions. but it can be connected to backend.
+
+for testing how interface works we can change roles in login function the [authentification service](./src/app/auth/services/authentication.service.ts).
+
+```JavaScript
+login(context: LoginContext): Observable<Credentials> {
+    const credentials: Credentials = new Credentials({
+      username: 'johndoe',
+      id: '',
+      token: '123456',
+      refreshToken: '123456',
+      expiresIn: 3600,
+      roles: ['user', 'admin'],
+      email: 'john@email.com',
+      firstName: 'John',
+      lastName: 'Doe',
+    });
+```
+
+We can add roles and permissions in [**app/@core/constance/app-settings.ts**](./src/app/@core/constants/app-settings.ts) file. Define roles and permissions for navigation in nav-menu-items.ts file in the same folder.
+Additionally i wrote a custom directive to check permissions in the template. It used for show buttons actions in the trades page.
+[**app/shared/directives/hasPermission.directive.ts**](./src/app/shared/directives/hasPermission.directive.ts)
+
+We can write custom decorator for check permissions in any method in components or services on a frontend. it can be usefull if we would like to show user all possible actions and tell user how to get permissions if he does not have permissions for some actions.
+
+⚡ Important **Note about client side role system**
+
+- never trast client side authorisation. It is not secure. We can use roles only for navigation and hide/show components on client side.
+- do not send any data to client that user not authorised to see.
+- when we perform any action on server side, check user permissions on the server side.
+- example stack for backend authorization: mongoDB, mongoose, casl
+- if we think we could have very complicated logic for authorization, we can use casl.js for authorization on the client too.
+
+## Localization
+
+We can use localization for our application. We can use ngx-translate package. It can use loacal translation files or use backend for translation. We can have some languages in application codebase and if it is not exists request to the backend for translation. In this example i created 2 lenguages solar and magelan and change language in the header and change some texts in interface.
+
+## Real-Time or Near-Real-Time Communication
+
+We can use socket.io for real-time communication. It is a library that allows us to communicate with the server in real-time. We can orginize subscription to the server and get data only related to user to minimize data transfer.
+
+In the example i emulate real-time data updates with the setInterval function in the [**app/pages/trades/trades.service.ts**](./src/app/pages/trades/trades.service.ts) file.
+
+## Performance
+
+- we should use lazy loading for modules and components.
+- we should use changeDetectionStategy.OnPush
+- we should use NgZone.runOutsideAngular() to run code outside of Angular's zone. example: [**app/pages/trades/trades.service.ts**](./src/app/pages/trades/trades.service.ts)
+- we should use webb workers for heavy calculations.
+- we should use subscription for data streams in real-time data updates to load only data that we need.
+- we should cache data. example: [**cachable.decorator**](./src/app/@core/helpers/cacheable.decorator.ts)
+
+## some known issues
+
+- we need to use npm i --force to install packages. as it has some issues with dependencies not ready for angular 19.
+
+# Angular 19 Enterprise-Grade Boilerplate
 
 Get started fast with this **Angular 19** boilerplate, crafted for **enterprise-level scalability**. It integrates critical features like **authentication**, **lazy loading**, **real-time socket communication**, **service workers**, **shell layout (header+sidebar)** making it ready to handle everything from SaaS platforms to enterprise dashboards. Built on the latest **Angular 19**, this template is packed with the newest capabilities and ensures that you adhere to **modern development best practices**.
 
