@@ -1,6 +1,6 @@
 # Galactic Energy Bazaar
 
-## Bollerplate
+## Boilerplate
 
 Afterr checking galactic energy bazaar requiriments i decided to use bollerplate that has most of the things that i need for the architecture of the project.
 https://github.com/ArslanAmeer/angular-boilerplate
