@@ -81,6 +81,14 @@ In the example i emulate real-time data updates with the setInterval function in
 - we should use subscription for data streams in real-time data updates to load only data that we need.
 - we should cache data. example: [**cachable.decorator**](./src/app/@core/helpers/cacheable.decorator.ts)
 
+## Consider how new features (like “energy futures” or “interplanetary auctions”) would plug into your structure
+
+- we can define more complicated data structures for trades and products
+- product types
+- product properties set for each product type
+- trade or product actions list for each product type
+- for show grids with products and trades probably better AG-Grid library, as it allows denamic column deffenitions and we do not need to change html code for each new product type.
+
 ## some known issues
 
 - we need to use npm i --force to install packages. as it has some issues with dependencies not ready for angular 19.
