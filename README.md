@@ -54,7 +54,7 @@ We can write custom decorator for check permissions in any method in components 
 ### TODO:
 
 - right now user credentials and authentication token are stored in local storage. It is not secure. we should move it to HTTP only cookies.
-- imtegrate authorization with backend like OAuth2
+- integrate authorization with backend supporting OAuth2
 - use PKCE for replace api-keys stored in the code that mitigates the risk of interception attacks
 - write interceptor for prevent http requests or replace it with https.
 
