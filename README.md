@@ -62,6 +62,10 @@ We can write custom decorator for check permissions in any method in components 
 
 We can use localization for our application. We can use ngx-translate package. It can use loacal translation files or use backend for translation. We can have some languages in application codebase and if it is not exists request to the backend for translation. In this example i created 2 lenguages solar and magelan and change language in the header and change some texts in interface.
 
+### TODO:
+
+if we would like use icons as a translations we can extend ngx-translate translate directive and check if we do not have text translation but have a swg icon we can use it.
+
 ## Real-Time or Near-Real-Time Communication
 
 We can use socket.io for real-time communication. It is a library that allows us to communicate with the server in real-time. We can orginize subscription to the server and get data only related to user to minimize data transfer.
